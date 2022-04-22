@@ -1,10 +1,19 @@
 import React, {useEffect, useState } from 'react'
 import Header from './Components/Header'
+import Keyboard from './Components/Keyboard';
 import { WordGrid } from './Components/WordGrid'
+
+
+import confetti from 'canvas-confetti';
 
 const App = () => {
   
   const keys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","U","V","W","X","Y","Z"];
+
+  //Sounds
+
+  const WinSound = new Audio("Sounds/GameWin.wav");
+  const LossSound = new Audio("Sounds/GameLoss.wav");
 
   //Variables and states
   let secretWord = "ABEJA";
@@ -15,6 +24,7 @@ const App = () => {
   const [tries, setTries] = useState(1);
   const [ListWord, setListWord] = useState([]);
   const [Status, setStatus] = useState('Playing');
+  const [LetterList, setLetterList] = useState([]);
 
   //functions
 
@@ -49,8 +59,10 @@ const App = () => {
     
     //ganó
     if(CurrentWord === secretWord){
-      setListWord([...ListWord, CurrentWord])
+      setListWord([...ListWord, CurrentWord]);
       setStatus("Win");
+      confetti();
+      WinSound.play();
       console.log("ganó");
       return;
     }
@@ -60,12 +72,31 @@ const App = () => {
       console.log("perdió")
       setListWord([...ListWord, CurrentWord])
       setTries(tries+1);
+      LossSound.play();
       setStatus("Loss");
       return;
     }
 
     setTries(tries+1);
-    setListWord([...ListWord, CurrentWord])
+    setListWord([...ListWord, CurrentWord]);
+
+    //letters used
+    let lettersUsedWord = [];
+    CurrentWord.split("").map((e)=>{
+      if(!lettersUsedWord.includes(e)){
+        lettersUsedWord.push(e)       
+      }
+    })
+    let finalLetter=[];
+    lettersUsedWord.map((e)=>{
+      if(!CurrentWord.split().includes(e)){
+        finalLetter.push(e);
+      }
+    })
+
+    let finallist = finalLetter.concat(LetterList);
+    setLetterList(finallist);
+    
     setCurrentWord("");
     return;
     
@@ -91,6 +122,7 @@ const App = () => {
     <div className='container'>
       <Header tries={tries} />
       <WordGrid CurrentWord={CurrentWord} ListWord={ListWord} secretWord={secretWord} tries={tries} LimitTries={LimitTries} Status={Status} />
+      <Keyboard keys={keys} LetterList={LetterList}/>
     </div>
   )
 }
