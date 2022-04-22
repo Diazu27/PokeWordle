@@ -1,0 +1,29 @@
+.Btn{
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    flex: 1;
+    margin: 10px;
+    font-weight: 800;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .i{
+        margin-right: 10px
+    }
+
+    &-wiki{
+        @extend .Btn;
+        background-color: gray;
+    }
+    &-play{
+        @extend .Btn;
+        background-color: rgb(66, 207, 66);
+    }
+}
+
+.buttonSection{
+    display: flex;
+    margin-top: 30px;
+}

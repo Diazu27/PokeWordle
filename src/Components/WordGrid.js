@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import CurrentGridline from './CurrentGridline'
 import GridLine from './GridLine'
 import GridLineEmpty from './GridLineEmpty'

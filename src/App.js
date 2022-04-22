@@ -5,10 +5,11 @@ import { WordGrid } from './Components/WordGrid'
 
 
 import confetti from 'canvas-confetti';
+import FinalModal from './Components/FinalModal';
 
 const App = () => {
   
-  const keys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","U","V","W","X","Y","Z"];
+  const keys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
   //Sounds
 
@@ -82,13 +83,13 @@ const App = () => {
 
     //letters used
     let lettersUsedWord = [];
-    CurrentWord.split("").map((e)=>{
+    CurrentWord.split("").forEach((e)=>{
       if(!lettersUsedWord.includes(e)){
         lettersUsedWord.push(e)       
       }
     })
     let finalLetter=[];
-    lettersUsedWord.map((e)=>{
+    lettersUsedWord.forEach((e)=>{
       if(!CurrentWord.split().includes(e)){
         finalLetter.push(e);
       }
@@ -120,6 +121,8 @@ const App = () => {
 
   return (
     <div className='container'>
+
+      {Status === 'Win' ? <FinalModal/> : ''}
       <Header tries={tries} />
       <WordGrid CurrentWord={CurrentWord} ListWord={ListWord} secretWord={secretWord} tries={tries} LimitTries={LimitTries} Status={Status} />
       <Keyboard keys={keys} LetterList={LetterList}/>
