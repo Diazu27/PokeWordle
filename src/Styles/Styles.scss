@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container{
+    max-width: 700px;
+    margin: auto;
+}
+
+
+.Header{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+.Icon{
+    font-size: 30px;
+}
+
+.WordGrid{
+    width:30vw;
+    height: 30vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;    
+}
+
+.GridLine{
+    display: flex;
+    justify-content: center;
+}
+
+.LetterBox{
+    display: flex;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin: 4px;
+    border: 1px solid gray;
+}
+
+.Ok{
+    background-color: green;
+}
+
+.Exist{
+    background-color: yellow;
+}
+
+.No{
+    background-color: gray;
+}
