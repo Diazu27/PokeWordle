@@ -6,6 +6,9 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+body{
+    background-color: rgb(2, 2, 20);
+}
 .container{
     max-width: 700px;
     margin: auto;
@@ -16,6 +19,7 @@
     display: flex;
     justify-content: space-between;
     margin: 20px 0px;
+    color: aliceblue;
 }
 
 .Icon{
@@ -24,7 +28,6 @@
 
 .WordGrid{
     width:30vw;
-    height: 30vw;
     margin: auto;
     display: flex;
     flex-direction: column;    
@@ -41,20 +44,56 @@
     height: 60px;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 30px;
     margin: 4px;
-    border: 1px solid gray;
+    border: 2px solid #13003f;
+    border-radius: 5px;
+    color: aliceblue;
 }
 
+
+//letterbox states
 .Ok{
-    background-color: green;
+    background-color: rgb(66, 207, 66);
+    border: 2px solid rgb(66, 207, 66);
 }
 
 .Exist{
     background-color: yellow;
+    border: 2px solid yellow;
+    color: rgb(26, 25, 25);
 }
 
 .No{
-    background-color: gray;
+    background-color: #0e012d;
+    color: aliceblue;
+    border: 2px solid #0e012d;
+}
+
+
+.Keyboard{
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.Key{
+    display: flex;
+    font-weight: 500;
+    color: aliceblue;
+    padding: 15px;
+    background-color: #0e012d;
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    border-radius: 5px;
+    border: 1px;
+}
+
+.KeyUsed{
+    border: 1px solid yellow;
 }
