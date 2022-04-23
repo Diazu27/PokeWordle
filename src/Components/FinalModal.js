@@ -22,7 +22,7 @@ const FinalModal = ({resetGame,Status,Pokemon, pokemonDesc}) => {
 
                 <div className='buttonSection'>
                     <a className='Btn-wiki' href={`https://pokemon.fandom.com/es/wiki/${Pokemon.name}`} target="_blank" rel="noopener noreferrer"><FaWikipediaW className='i'/>More</a>
-                    <a className='Btn-play' href="/#" onClick={()=>{resetGame()}}>Play again</a>
+                    <a className='Btn-play' href={() => false} onClick={()=>{resetGame()}}>Play again</a>
                 </div>
             </div>
             
