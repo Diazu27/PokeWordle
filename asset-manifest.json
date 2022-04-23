@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/Wordle-clon/static/css/main.b313ca5a.css",
-    "main.js": "/Wordle-clon/static/js/main.fb299bc6.js",
-    "index.html": "/Wordle-clon/index.html",
-    "main.b313ca5a.css.map": "/Wordle-clon/static/css/main.b313ca5a.css.map",
-    "main.fb299bc6.js.map": "/Wordle-clon/static/js/main.fb299bc6.js.map"
+    "main.css": "/PokeWordle/static/css/main.b313ca5a.css",
+    "main.js": "/PokeWordle/static/js/main.fb299bc6.js",
+    "index.html": "/PokeWordle/index.html",
+    "main.b313ca5a.css.map": "/PokeWordle/static/css/main.b313ca5a.css.map",
+    "main.fb299bc6.js.map": "/PokeWordle/static/js/main.fb299bc6.js.map"
   },
   "entrypoints": [
     "static/css/main.b313ca5a.css",
