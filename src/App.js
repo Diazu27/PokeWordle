@@ -6,37 +6,68 @@ import { WordGrid } from './Components/WordGrid'
 
 import confetti from 'canvas-confetti';
 import FinalModal from './Components/FinalModal';
+import { GameStatus, keys } from './Types/Types';
+import axios from 'axios';
 
 const App = () => {
-  
-  const keys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-
   //Sounds
-
-  const WinSound = new Audio("Sounds/GameWin.wav");
   const LossSound = new Audio("Sounds/GameLoss.wav");
+  const WinSound = new Audio("Sounds/GameWin.wav");
 
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+  
+  const getPokemon=()=>{
+    let id = getRandomInt(0,500);
+
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((Response)=>{
+          setPokemon(Response.data);
+          setsecretWord(Response.data.name.toUpperCase());       
+     })
+     axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((Response)=>{
+        setPokemonDesc(Response.data.flavor_text_entries[6].flavor_text.replace('\n',' ').replace('\f',' '));
+     })
+}
+
+  //api request
+  const [Pokemon, setPokemon] = useState({})
+  const [secretWord, setsecretWord] = useState("")
+  const [pokemonDesc, setPokemonDesc] = useState("");
+  
+  useEffect(() => {
+    getPokemon();
+  },[])
+  
+ // let secretWord = "abeja";
   //Variables and states
-  let secretWord = "ABEJA";
   let secretLength = secretWord.length;
   let LimitTries = 6; 
+
+
 
   const [CurrentWord, setCurrentWord] = useState("")
   const [tries, setTries] = useState(1);
   const [ListWord, setListWord] = useState([]);
-  const [Status, setStatus] = useState('Playing');
+  const [Status, setStatus] = useState(GameStatus.Playing);
   const [LetterList, setLetterList] = useState([]);
 
   //functions
+  const resetGame = ()=>{
+    getPokemon();
+    setCurrentWord("")
+    setTries(1);
+    setListWord([]);
+    setStatus(GameStatus.Playing);
+    setLetterList([])
+  }
 
   const handleKey = (event)=>{
     const letter = event.key.toUpperCase();
-
-    if(event.key === 'Enter' && CurrentWord.length === secretLength && Status === 'Playing' ){
+    if(event.key === 'Enter' && CurrentWord.length === secretLength && Status === GameStatus.Playing ){
        onEnter();
       return;
     }
-
     if(event.key === 'Backspace' && CurrentWord.length > 0){
         onDelete();
       return;
@@ -50,31 +81,26 @@ const App = () => {
     }    
   }
 
-
   const onInput=(letter)=>{
       let word = CurrentWord+letter;
       setCurrentWord(word);
   }
 
   const onEnter=()=>{
-    
     //ganó
     if(CurrentWord === secretWord){
       setListWord([...ListWord, CurrentWord]);
-      setStatus("Win");
+      setStatus(GameStatus.GameWin);
       confetti();
       WinSound.play();
-      console.log("ganó");
       return;
     }
 
-
-    if(tries === LimitTries && Status === 'Playing'){
-      console.log("perdió")
+    if(tries === LimitTries && Status === GameStatus.Playing){
       setListWord([...ListWord, CurrentWord])
       setTries(tries+1);
       LossSound.play();
-      setStatus("Loss");
+      setStatus(GameStatus.GameLoss);
       return;
     }
 
@@ -108,7 +134,6 @@ const App = () => {
     setCurrentWord(word);
   }
 
-  
   //Catch keys
   useEffect(() => {
     document.addEventListener("keydown",handleKey);
@@ -118,11 +143,9 @@ const App = () => {
   })
   
 
-
   return (
     <div className='container'>
-
-      {Status === 'Win' ? <FinalModal/> : ''}
+      {Status === GameStatus.GameWin || Status === GameStatus.GameLoss ? <FinalModal resetGame={resetGame} pokemonDesc={pokemonDesc} Pokemon={Pokemon} Status={Status}/> : ''}
       <Header tries={tries} />
       <WordGrid CurrentWord={CurrentWord} ListWord={ListWord} secretWord={secretWord} tries={tries} LimitTries={LimitTries} Status={Status} />
       <Keyboard keys={keys} LetterList={LetterList}/>

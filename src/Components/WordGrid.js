@@ -1,3 +1,4 @@
+import { GameStatus } from '../Types/Types';
 import CurrentGridline from './CurrentGridline'
 import GridLine from './GridLine'
 import GridLineEmpty from './GridLineEmpty'
@@ -14,11 +15,8 @@ export const WordGrid = ({CurrentWord,ListWord,secretWord,tries,LimitTries,Statu
 
   return (
     <div className='WordGrid'>
-
       {ListWord.map((w,i)=><GridLine word={w} key={i} secretWord={secretWord}/>)}
-
-      {Status === 'Playing' ? <CurrentGridline word={CurrentWord} secretWord={secretWord}/> : ''}
-
+      {Status === GameStatus.Playing ? <CurrentGridline word={CurrentWord} secretWord={secretWord}/> : ''}
       {Array.from(Array(cont)).map((_,i)=> <GridLineEmpty key={i} secretWord={secretWord}/>)}
     </div>
   )

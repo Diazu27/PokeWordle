@@ -1,14 +1,15 @@
+import { letterStatus } from '../Types/Types'
 import LetterBox from './LetterBox'
 
 const GridLine = ({word, secretWord}) => {
 
     const CheckLetter= (letter,position) => {
       if(letter.toUpperCase() === secretWord[position].toUpperCase()){
-        return 'Ok'
+        return letterStatus.Ok
       }else if(secretWord.toUpperCase().includes(letter.toUpperCase())){
-        return'Exist'
+        return letterStatus.Exist
       }else{
-        return "No"
+        return letterStatus.No
       }
     }
       
