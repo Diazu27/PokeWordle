@@ -1,6 +1,6 @@
 {
-  "name": "wordle-clon",
-  "homepage":"https://diazu27.github.io/Wordle-clon",
+  "name": "PokeWordle",
+  "homepage":"https://diazu27.github.io/PokeWordle",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
